@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Optional
 
 from sqlalchemy.orm import Mapped, mapped_column
@@ -12,5 +11,4 @@ class Secret(Base):
     message: Mapped[str] = mapped_column(nullable=True)
     passphrase: Mapped[str] = mapped_column(nullable=True)
     secret_key: Mapped[Optional[str]]
-    
     

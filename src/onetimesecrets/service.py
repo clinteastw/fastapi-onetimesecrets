@@ -6,8 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models.secrets import Secret
 
 from .schemas import SecretCreate
-from .utils import (delete_found_secret_message_after_reading, encrypt_secret,
-                    verify_passphrase, decrypt_secret)
+from .utils import (decrypt_secret, delete_found_secret_message_after_reading,
+                    encrypt_secret, verify_passphrase)
 
 
 async def generate_secret_key(
@@ -55,10 +55,12 @@ async def get_secret_message(
     if not found_secret:
         return {"error": "Secret not found"}
 
+    #If passphrase was not provided
     if passphrase is None:
         decoded_secret_message = decrypt_secret(found_secret, passphrase=None)
         return {"message": decoded_secret_message, "found_secret": found_secret}
 
+    #If it was veryfiyng it and decrypts
     if verify_passphrase(found_secret, passphrase):
         decoded_secret_message = decrypt_secret(found_secret, passphrase)
         return {"message": decoded_secret_message, "found_secret": found_secret}
