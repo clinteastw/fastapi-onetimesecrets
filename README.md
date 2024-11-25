@@ -6,3 +6,5 @@ If a passphrase is provided, it is hashed using bcrypt and then used to encrypt 
 
 `docker-compose build` \
 `docker-compose up -d`
+
+Go to http://localhost:8000/docs
