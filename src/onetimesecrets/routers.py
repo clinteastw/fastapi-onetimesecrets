@@ -39,4 +39,5 @@ async def get_secret(
 
     if "message" in secret_message:
         return {"Your decrypted message": secret_message["message"]}
+    
     return secret_message
